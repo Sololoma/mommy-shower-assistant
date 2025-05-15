@@ -9,6 +9,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
   </head>
   <body>
     <div class="container">
@@ -17,6 +20,7 @@
         <p class="subtitle">
           Every drop of water that touches you is a sacred ritual
         </p>
+        <p class="session-id" id="sessionIdDisplay"></p>
       </header>
 
       <div class="main-content">
@@ -71,54 +75,70 @@
 
         <!-- Tribute Section -->
         <div class="tribute-section">
-            <h2><i class="fas fa-gem"></i> Instant Tributes</h2>
-            <div class="tribute-grid">
-                <!-- Basic Mood Tributes -->
-                <div class="tribute-option" data-amount="100">
-                    <i class="fas fa-smile"></i>
-                    <h3>Mommy is pleased</h3>
-                    <p>100 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
-                <div class="tribute-option" data-amount="100">
-                    <i class="fas fa-heart"></i>
-                    <h3>Mommy is happy</h3>
-                    <p>100 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
-                
-                <!-- Special Occasion Tributes -->
-                <div class="tribute-option" data-amount="200">
-                    <i class="fas fa-crown"></i>
-                    <h3>Worship Reminder</h3>
-                    <p>200 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
-                <div class="tribute-option" data-amount="150">
-                    <i class="fas fa-water"></i>
-                    <h3>Water Temperature Perfect</h3>
-                    <p>150 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
-                
-                <!-- Luxury Tributes -->
-                <div class="tribute-option" data-amount="300">
-                    <i class="fas fa-spa"></i>
-                    <h3>Divine Relaxation</h3>
-                    <p>300 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
-                <div class="tribute-option" data-amount="500">
-                    <i class="fas fa-star"></i>
-                    <h3>Royal Orgasm</h3>
-                    <p>500 EGP</p>
-                    <button class="tribute-btn">Submit Tribute</button>
-                </div>
+          <h2><i class="fas fa-gem"></i> Instant Tributes</h2>
+          <div class="tribute-grid">
+            <div class="tribute-option" data-amount="100">
+              <i class="fas fa-smile"></i>
+              <h3>Mommy is pleased</h3>
+              <p>100 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
             </div>
-            <div class="tribute-total">
-                <h3>Total Tributes: <span id="totalTributes">0</span> EGP</h3>
+            <div class="tribute-option" data-amount="100">
+              <i class="fas fa-heart"></i>
+              <h3>Mommy is happy</h3>
+              <p>100 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
             </div>
+            <div class="tribute-option" data-amount="200">
+              <i class="fas fa-crown"></i>
+              <h3>Worship Reminder</h3>
+              <p>200 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
+            </div>
+            <div class="tribute-option" data-amount="150">
+              <i class="fas fa-water"></i>
+              <h3>Perfect Temperature</h3>
+              <p>150 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
+            </div>
+            <div class="tribute-option" data-amount="300">
+              <i class="fas fa-spa"></i>
+              <h3>Divine Relaxation</h3>
+              <p>300 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
+            </div>
+            <div class="tribute-option" data-amount="500">
+              <i class="fas fa-star"></i>
+              <h3>Royal Orgasm</h3>
+              <p>500 EGP</p>
+              <button class="tribute-btn">Submit Tribute</button>
+            </div>
+          </div>
+          <div class="tribute-total">
+            <h3>Total Tributes: <span id="totalTributes">0</span> EGP</h3>
+          </div>
         </div>
+      </div>
+
+      <!-- Join Session Modal -->
+      <div id="join-modal">
+        <div class="modal-content">
+          <h2><i class="fas fa-link"></i> Join Session</h2>
+          <input
+            type="text"
+            id="session-id-input"
+            placeholder="Enter Session ID"
+          />
+          <div class="modal-buttons">
+            <button id="join-btn">Connect</button>
+            <button id="close-modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <button id="show-join-modal" class="floating-btn">
+        <i class="fas fa-user-plus"></i> Join Session
+      </button>
 
       <footer>
         <p>Created with complete devotion by your loyal servant</p>
